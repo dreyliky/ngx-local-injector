@@ -1,27 +1,81 @@
-# InjectorContainer
+# Local Injector 🪄 [Angular 14+]
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
+## Idea
 
-## Development server
+The function `injectPrivate` allows you to inject a dependency without adding it to the providers.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Use for local dependencies you need only in the specific class as low-level dependencies.
 
-## Code scaffolding
+## Why?
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Allows you better encapsulate your `low-level Injectable` dependencies.
 
-## Build
+## Description
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Works in context of `Component, Directive, Injectable, Pipe, Module`.
 
-## Running unit tests
+## Examples
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Organize your Service following the Single Responsibility principle and with encapsulation of low-level services:
 
-## Running end-to-end tests
+**window.service.ts**
+``` typescript
+import { injectPrivate } from 'ngx-local-injector';
+import {
+    WindowOrderingService,
+    WindowCoordinatesService,
+    WindowActivityService,
+    WindowConfigService
+} from './my-private-services';
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+/** @public */
+@Injectable()
+export class WindowService {
+    // Each of these services will be injected
+    // in the context of our WindowService.
+    // You can not add these services to the providers.
+    private readonly orderingService = injectPrivate(WindowOrderingService);
+    private readonly coordinatesService = injectPrivate(WindowCoordinatesService);
+    private readonly activityService = injectPrivate(WindowActivityService);
+    private readonly configService = injectPrivate(WindowConfigService);
 
-## Further help
+    constructor() {
+        // All your private services available here
+        console.log(this.orderingService);
+    }
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    public create(): void {
+        this.orderingService.doSomething();
+        this.coordinatesService.doSomething();
+        this.activityService.doSomething();
+        this.configService.doSomething();
+    }
+}
+```
+
+**window-ordering.service**
+``` typescript
+import { OPENED_WINDOW } from '../tokens';
+import { DynamicWindow } from '../interaces';
+
+/** @private */
+@Injectable()
+export class WindowService {
+    constructor(
+        // You can use default DI features as well
+        @Inject(OPENED_WINDOW) private readonly openedWindow: DynamicWindow
+    ) {}
+}
+```
+
+Provide single `public` `WindowService` on some level, instead of all those services.
+
+So, in this case all other services will be `private`.
+
+**window.module.ts**
+``` typescript
+@NgModule({
+    providers: [WindowService]
+})
+export class WindowModule {}
+```
