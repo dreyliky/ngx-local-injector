@@ -2,7 +2,7 @@ import { inject, Injector, Type, AbstractType, InjectionToken } from '@angular/c
 
 type ProviderToken<T> = Type<T> | AbstractType<T> | InjectionToken<T>;
 
-export function injectPrivate<T>(token: ProviderToken<T>): T {
+export function injectLocal<T>(token: ProviderToken<T>): T {
     const parentInjector = inject(Injector);
     const localInjector = Injector.create({
         providers: [token as any],

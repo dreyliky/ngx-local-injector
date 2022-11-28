@@ -1,6 +1,6 @@
 # Local Injector 🪄 [Angular 14+]
 
-The function `injectPrivate` allows you to inject a dependency without adding it to the providers.
+The function `injectLocal` allows you to inject a dependency without adding it to the providers.
 
 Use for local dependencies you need only in the specific class as low-level dependencies.
 
@@ -24,7 +24,7 @@ Organize your Service following the Single Responsibility principle and with enc
 
 **window.service.ts**
 ``` typescript
-import { injectPrivate } from 'ngx-local-injector';
+import { injectLocal } from 'ngx-local-injector';
 import {
     WindowOrderingService,
     WindowCoordinatesService,
@@ -38,10 +38,10 @@ export class WindowService {
     // Each of these services will be injected
     // in the context of our WindowService.
     // You can not add these services to the providers.
-    private readonly orderingService = injectPrivate(WindowOrderingService);
-    private readonly coordinatesService = injectPrivate(WindowCoordinatesService);
-    private readonly activityService = injectPrivate(WindowActivityService);
-    private readonly configService = injectPrivate(WindowConfigService);
+    private readonly orderingService = injectLocal(WindowOrderingService);
+    private readonly coordinatesService = injectLocal(WindowCoordinatesService);
+    private readonly activityService = injectLocal(WindowActivityService);
+    private readonly configService = injectLocal(WindowConfigService);
 
     constructor() {
         // All your private services available here

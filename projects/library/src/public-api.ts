@@ -1,1 +1,1 @@
-export * from './lib/inject-private.function';
+export * from './lib/inject-local.function';

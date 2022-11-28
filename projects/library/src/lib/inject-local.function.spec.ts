@@ -1,6 +1,6 @@
 import { Injectable, InjectionToken, Inject, Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { injectPrivate } from './inject-private.function';
+import { injectLocal } from './inject-local.function';
 
 const GLOBAL_TOKEN = new InjectionToken('GLOBAL_TOKEN');
 const GLOBAL_TOKEN_VALUE = 'myValue';
@@ -24,15 +24,15 @@ class ThirdDependService {
 
 @Injectable()
 class SecondDependService {
-    public readonly thirdService = injectPrivate(ThirdDependService);
+    public readonly thirdService = injectLocal(ThirdDependService);
 
     public tst = 789;
 }
 
 @Injectable()
 class MyService {
-    public readonly firstService = injectPrivate(FirstDependService);
-    public readonly secondService = injectPrivate(SecondDependService);
+    public readonly firstService = injectLocal(FirstDependService);
+    public readonly secondService = injectLocal(SecondDependService);
 }
 
 @Component({
@@ -50,7 +50,7 @@ class MyComponent {
     ) {}
 }
 
-describe('injectPrivate', () => {
+describe('injectLocal', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [
@@ -66,7 +66,7 @@ describe('injectPrivate', () => {
         .compileComponents();
     });
 
-    it('should create the services via injectPrivate function', () => {
+    it('should create the services via injectLocal function', () => {
         const myComponent = TestBed.createComponent(MyComponent);
         const myComponentInstance = myComponent.componentRef.instance;
 
