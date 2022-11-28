@@ -72,7 +72,7 @@ export class WindowService {
 }
 ```
 
-Provide single `public` `WindowService` on some level, instead of all those services.
+Provide **single** `public` `WindowService` on some level, instead of providing all those services.
 
 So, in this case all other services will be `private`.
 
