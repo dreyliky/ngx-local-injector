@@ -37,7 +37,7 @@ import {
 export class WindowService {
     // Each of these services will be injected
     // in the context of our WindowService.
-    // You can not add these services to the providers.
+    // You don't need to add these services to the providers.
     private readonly orderingService = injectLocal(WindowOrderingService);
     private readonly coordinatesService = injectLocal(WindowCoordinatesService);
     private readonly activityService = injectLocal(WindowActivityService);
