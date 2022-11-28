@@ -16,7 +16,7 @@ Allows you better encapsulate your `low-level Injectable` dependencies.
 
 ## Description
 
-Works in context of `Component, Directive, Injectable, Pipe, Module`.
+Works in context of `Component`, `Directive`, `Injectable`, `Pipe`, `Module`.
 
 ## Examples
 
