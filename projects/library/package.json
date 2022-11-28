@@ -1,6 +1,6 @@
 {
   "name": "ngx-local-injector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "@angular/common": "^14.2.0",
     "@angular/core": "^14.2.0",
@@ -14,5 +14,13 @@
   ],
   "maintainers": [
     "DreyLiky"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dreyliky/ngx-local-injector.git"
+  },
+  "homepage": "https://github.com/dreyliky/ngx-local-injector#readme",
+  "bugs": {
+    "url": "https://github.com/dreyliky/ngx-local-injector/issues"
+  }
 }

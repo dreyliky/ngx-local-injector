@@ -1,10 +1,14 @@
 # Local Injector 🪄 [Angular 14+]
 
-## Idea
-
 The function `injectPrivate` allows you to inject a dependency without adding it to the providers.
 
 Use for local dependencies you need only in the specific class as low-level dependencies.
+
+## Install
+
+```
+npm i ngx-local-injector
+```
 
 ## Why?
 
