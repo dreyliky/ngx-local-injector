@@ -64,7 +64,7 @@ import { DynamicWindow } from '../interaces';
 
 /** @private */
 @Injectable()
-export class WindowService {
+export class WindowOrderingService {
     constructor(
         // You can use default DI features as well
         @Inject(OPENED_WINDOW) private readonly openedWindow: DynamicWindow
